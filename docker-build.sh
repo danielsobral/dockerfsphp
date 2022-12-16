@@ -25,7 +25,6 @@ read projeto
 pasta_projeto=$projeto
 diretorio_raiz=$(pwd);
 
-
 if [ -d $diretorio_raiz/$pasta_projeto ];
 then
 	echo "Diretório com o nome $pasta_projeto já existe";
@@ -35,4 +34,18 @@ else
 	echo "Diretório $pasta_projeto criado com sucesso";
 fi
 
+cd $diretorio_raiz/$pasta_projeto;
+
+if [ ! -f $diretorio_raiz/$pasta_projeto/Dockerfile && ! -f $diretorio_raiz/$pasta_projeto/docker-compose.yml ];
+then
+        echo "Realizando o download dos arquivos DockerFile e docker-compose.yml";
+	git clone https://github.com/danielsobral/dockerfsphp.git
+fi
+
+mkdir $diretorio_raiz/$pasta_projeto/db_data;
+rm $diretorio_raiz/$pasta_projeto/docker-build.sh
+
+docker build . -t danielsobralnascimento/webserver:1.0
+docker compose up -d
 machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1);
+docker exec $machine_apache composer create-project --prefer-dist laravel/laravel blog

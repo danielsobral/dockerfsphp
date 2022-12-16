@@ -15,8 +15,7 @@ RUN apt update && \
     apt install -y unzip && \
     apt install -y git && \
     apt install -y curl && \
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php && rm composer-setup.php && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer && \
-    composer create-project --prefer-dist laravel/laravel blog
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && php composer-setup.php && rm composer-setup.php && mv composer.phar /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 
 EXPOSE 80
 EXPOSE 3306
