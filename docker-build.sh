@@ -39,13 +39,18 @@ cd $diretorio_raiz/$pasta_projeto;
 if [ ! -f $diretorio_raiz/$pasta_projeto/Dockerfile && ! -f $diretorio_raiz/$pasta_projeto/docker-compose.yml ];
 then
         echo "Realizando o download dos arquivos DockerFile e docker-compose.yml";
-	git clone https://github.com/danielsobral/dockerfsphp.git
+	git clone https://github.com/danielsobral/dockerfsphp.git && \
+	echo "Download concluído!"
 fi
 
 mkdir $diretorio_raiz/$pasta_projeto/db_data;
 rm $diretorio_raiz/$pasta_projeto/docker-build.sh
 
-docker build . -t danielsobralnascimento/webserver:1.0
-docker compose up -d
-machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1);
+echo "==============================================="
+echo "==== Iniciando a construção dos containers ===="
+echo "==============================================="
+sleep 5
+docker build . -t danielsobralnascimento/webserver:1.0 && \
+docker compose up -d && \
+machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1) && \
 docker exec $machine_apache composer create-project --prefer-dist laravel/laravel blog
