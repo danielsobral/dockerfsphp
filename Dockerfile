@@ -7,7 +7,7 @@ RUN apt update && \
     apt install -y apache2 && \
     apt install -y php && \
     apt install -y php-xdebug && \
-    apt install -y php8.1-mysql && \
+    apt install -y php-mysql && \
     apt install -y php-curl && \
     apt install -y php-zip && \
     apt install -y php-xml && \
