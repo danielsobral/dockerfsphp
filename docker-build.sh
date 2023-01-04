@@ -54,8 +54,8 @@ echo "==================================================="
 sleep 5
 docker build . -t danielsobralnascimento/webserver:1.0 && \
 docker compose up -d && \
-machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1) && \
-docker exec $machine_apache composer create-project --prefer-dist laravel/laravel blog && \
+#machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1) && \
+#docker exec $machine_apache composer create-project --prefer-dist laravel/laravel blog && \
 echo "====================================================================="
 echo "==== Construção dos containers finalizada #Bora Codar em PHP! :) ===="
 echo "====================================================================="
