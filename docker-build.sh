@@ -18,6 +18,9 @@ else
         echo "Diretório $pasta_principal criado com sucesso";
 fi
 
+echo "Deseja otimizar seu arquivo PHP.ini? s/n"
+read phpIni;
+
 cd $diretorio_atual/$pasta_principal;
 
 echo "Qual o nome da pasta do seu projeto?"
@@ -54,7 +57,13 @@ echo "==================================================="
 sleep 5
 docker build . -t danielsobralnascimento/webserver:1.0 && \
 docker compose up -d && \
-#machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1) && \
+machine_apache=$(docker ps -a | grep '/bin/sh -c' | cut -d " " -f1) && \
+if [ $phpIni == 's' -o $phpIni == 'S' ]; then
+	docker cp ./php.ini $machine_apache:/etc/php/8.1/apache2/php.ini
+fi
+rm $diretorio_raiz/$pasta_projeto/Dockerfile && \
+rm $diretorio_raiz/$pasta_projeto/docker-compose.yml && \
+rm $diretorio_raiz/$pasta_projeto/php.ini && \
 #docker exec $machine_apache composer create-project --prefer-dist laravel/laravel blog && \
 echo "====================================================================="
 echo "==== Construção dos containers finalizada #Bora Codar em PHP! :) ===="
