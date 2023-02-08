@@ -10,6 +10,7 @@ RUN apt update && \
     apt install -y php-mysql && \
     apt install -y php-curl && \
     apt install -y php-zip && \
+    apt install -y php-mbstring && \
     apt install -y php-xml && \
     apt install -y zip && \
     apt install -y unzip && \
